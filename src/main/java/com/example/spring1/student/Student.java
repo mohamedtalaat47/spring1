@@ -3,13 +3,7 @@ package com.example.spring1.student;
 import java.time.LocalDate;
 import java.time.Period;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 @Entity
 @Table
@@ -19,9 +13,16 @@ public class Student {
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
 
+    @Column(updatable = false)
     private long id;
+
+    @Column(nullable = false, columnDefinition = "text")
     private String name;
+
+    @Column(nullable = false, unique = true, columnDefinition = "text")
     private String email;
+
+    @Column(nullable = false, columnDefinition = "Date")
     private LocalDate dob;
     @Transient
     private Integer age;
