@@ -2,7 +2,12 @@ package com.example.spring1.student;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import com.example.spring1.Course.Course;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +31,10 @@ public class Student {
     private LocalDate dob;
     @Transient
     private Integer age;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledStudent", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private Set<Course> Courses = new HashSet<>();
 
     public Student() {
     }
